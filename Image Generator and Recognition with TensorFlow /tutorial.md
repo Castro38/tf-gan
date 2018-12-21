@@ -58,9 +58,9 @@ The Deep Convolutional Generative Adversarial Networks or DCGAN is another type 
 
 #### Latent Space
 
-#### Environment Setup
-
 #### The Data Set
+
+### Environment Setup
 
 The following libraries need to be installed:
 
