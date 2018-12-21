@@ -54,7 +54,13 @@ Both Networks are initially trained separately then put up against each other, d
 
 The Deep Convolutional Generative Adversarial Networks or DCGAN is another type of generative network. Unlike GAN, DCGANs is composed of convolutional layers  without max pooling or fully connected layers
 
-## Environment Setup
+#### Gradient Descent
+
+#### Latent Space
+
+#### Environment Setup
+
+#### The Data Set
 
 The following libraries need to be installed:
 
@@ -187,15 +193,16 @@ Also check your **venv** directory for the animation gif generated with celebrit
 
 ## How human are the generated Images?
 
-DCGAN networks are very powerful as seen on the results 
+DCGAN networks are very powerful as seen on the results on the previous section. 
 
 
-
-![frame-00-labeled](assets/frame-00-labeled.jpg) ![frame-06-labeled](assets/frame-06-labeled.jpg)
-![frame-15-labeled](assets/frame-15-labeled.jpg) ![frame-20-labeled](assets/frame-20-labeled.jpg)
+![frame-00-labeled](assets/frame-00-labeled.jpg)
+![frame-06-labeled](assets/frame-06-labeled.jpg)
+![frame-15-labeled](assets/frame-15-labeled.jpg)
+![frame-20-labeled](assets/frame-20-labeled.jpg)
 
 ## Summary
-
+Congratulations, you have succesfully gn
 
 
 
