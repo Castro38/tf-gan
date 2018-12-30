@@ -31,11 +31,9 @@ In this tutorial we will explore at a very hight level the role that Deep Convol
 - [Concepts](#concepts)
 - [Environment Setup](#environment-setup)
 - [Implement the Image Generation Model](#implement-the-image-generation-model)
-- [How human are the generated Images?](#how-human-are-the-generated-images?)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
-- [Appendix A: Troubleshoot](#appendix-a-troubleshoot)
-- [Appendix B: Extra Features](#appendix-b-extra-features)
+- [Appendix A: Upload and Image and Compare the Loss Values](#appendix-a-upload-an-iamge-and-compare-the-loss-values)
 
 ## Concepts
 
@@ -73,7 +71,6 @@ The following images are example of a DCGANs by [Alec Radford's DCGAN Paper](htt
 ![dcgan-room-generator](assets/dcgan-room-generator.jpg)
 
 Learn more about DCGANs in the [Further Reading](#further-reading) section of this tutorial.
-
 
 ### Environment Setup
 
@@ -152,7 +149,7 @@ Download the python code to generate celebrity images.
 >Note: Learn more about Google's Colab [Image Generation Python Script](https://github.com/tensorflow/hub/blob/master/examples/colab/tf_hub_generative_image_module.ipynb)
 
 ~~~
-wget github.com/gen-image.py
+wget github.com/ImageGenerator.py
 ~~~
 
 ### Run the image generator code:
@@ -162,9 +159,9 @@ Activate the virtual environment that was just created.
 source ~venv/bin/activate
 ~~~
 
-Execute the python script
+Execute the python script:
 ~~~
-python3 gen-image.py
+python3 ImageGenerator.py
 ~~~
 
 ### Results
@@ -177,11 +174,11 @@ The GIF below was generated as a result of the pre-trained GAN model and TF-Hub 
 
 On your terminal you will also see the following values. These values were obtained by first finding the loss function between a target image in this case and image from the **CelebrityAs** dataset and the  generated image. Gradient descent was then used in the loss function generated which generated the values that would minimize the loss. Gradient descent is a optimization algorithm used to find the minimum of a function or the point where the loss function converges. Learn more about [gradient descent](https://developers.google.com/machine-learning/crash-course/reducing-loss/gradient-descent).
 
-In this case because an image from the same dataset was used the descent to the minimum was quick. These can be noted from the values below. 
+In this case because an image from the same dataset was used the descent to the minimum was quick. These can be noted from the values below.
 
 ~~~
 ~/venv
-$python3 gen-image.py
+$python3 ImageGenerator.py
 2018-12-19 17:55:19.249869: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
 <IPython.core.display.Image object>
 0.68876916
@@ -227,20 +224,77 @@ $python3 gen-image.py
 (venv)
 ~~~
 
-Also check your **venv** directory for the animation gif generated with celebrity images.
+Let's try an image of an animated celebrity and see what values we get. A legend in the culinary world, Gordon Ramsay. We will use Mr. Ramsay's Simpson-style animated image as the target image and compare the loss values. Full credit to the Simpson's animators for the Simpson-style Gordon Ramsay image below.
 
+![gordon-ramsay](assets/gordon-ramsay.jpg)
 
+Download the image in the venv directory where you have the ImageGenerator.py code.
 
-## Recognition Network
+~~~
+wget github.com/gordon-ramsay.jpg
+~~~
 
-DCGAN networks are very powerful as seen on the results on the previous section. Human brains, 
+~~~
+python3 ImageGenerator.py --image "gordon-ramsay.jpg"
+~~~
 
+Run the code:
+
+You should see results similar to the ones below. Notice how it takes a slightly longer for the loss function to converge.
+
+~~~
+~/venv
+$python3 ImageGenerator.py
+2018-12-29 18:22:05.498454: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+<IPython.core.display.Image object>
+0.98289144
+5.789063
+5.1794066
+2.8688426
+0.59100956
+1.3075445
+0.60824585
+1.4375224
+1.7986321
+1.1370378
+0.53862023
+0.8939043
+0.4314929
+0.966286
+1.2422816
+0.77658486
+0.525299
+0.80663085
+0.4287827
+0.75106114
+0.9834588
+0.5788738
+0.58368105
+0.8411632
+0.51138973
+0.5612605
+0.7653878
+0.3916356
+0.6961323
+0.9382956
+0.6357596
+0.37275413
+0.56090117
+0.20964515
+0.8261446
+1.0553855
+0.768913
+0.19808885
+0.37734875
+0.1718393
+(venv)
+~~~
 
 ## Summary
-Congratulations, you have succesfully gn
 
+Congratulations, you have successfully generated images using a pre-trained GANs model. You generated a GIF of Celebrity images and tested how quickly the loss function converged while using an image from the original dataset and an image outside the dataset.
 
-## Futher Reading 
+## Further Reading 
 
 - [Generative Adversarial Nets by Ian Goodfellow](https://arxiv.org/pdf/1406.2661.pdf)
 - [Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://arxiv.org/abs/1511.06434)
@@ -250,3 +304,13 @@ Congratulations, you have succesfully gn
 - [The Mostly Complete Chart of Neural Networks, explained](https://towardsdatascience.com/the-mostly-complete-chart-of-neural-networks-explained-3fb6f2367464)
 - [TensorFlow](https://www.tensorflow.org/)
 - [TensorFlow Hub](https://www.tensorflow.org/hub/)
+
+## Appendix A: Upload and Image and Compare the Loss Values
+
+Try your own image. Upload an image and compare your results with those obtained when using a target image from the original dataset.
+
+Simply upload the image to the venv directory and run the ImageGenerator.py script.
+
+~~~
+python3 ImageGenerator.py --image "<name of image>"
+~~~
