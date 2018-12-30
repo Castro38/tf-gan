@@ -19,14 +19,6 @@ series: TBD
 
 In this tutorial we will explore at a very hight level the role that Deep Convolutional Generative Adversarial Networks or DCGANs play in the generation of images while leveraging Hortonworks Data Platform(HDP).
 
-We will use a pre-trained GANs model from TensorFlow Hub to generate a GIF of Celebrity generated images using TF-Hub module [program-128](https://tfhub.dev/google/progan-128/1) which was trained on the **CelebA** Dataset on a GPU of 636,801 steps with a batch size of 16.
-
- Then, we will take the generated images and passed through the CNN model used in [Object Detection in 5 Minutes](http://hortonworks.com//tutorial/object-detection-in-5-minutes)that has been trained to detect objects and we will observe how well the GAN model did in generating the celebrity images.
-
->Note: The python code for the GAN and CNN models are slight modifications of Google's Colab [Generating Images](https://github.com/tensorflow/hub/blob/master/examples/colab/tf_hub_generative_image_module.ipynb) and [Object Detection](https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/object_detection.ipynb).  
-
-![frame-15-labeled](assets/frame-15-labeled.jpg)
-
 ## Prerequisites
 
 - Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://hortonworks.com/downloads/#sandbox) Sandbox
@@ -82,6 +74,7 @@ The following images are example of a DCGANs by [Alec Radford's DCGAN Paper](htt
 
 Learn more about DCGANs in the [Further Reading](#further-reading) section of this tutorial.
 
+
 ### Environment Setup
 
 The following libraries need to be installed:
@@ -130,6 +123,11 @@ python3 -m pip install --upgrade https://storage.googleapis.com/tensorflow/mac/c
 
 ## Implement the Image Generation Model
 
+We will use a pre-trained GANs model from TensorFlow Hub that was trained using TF-Hub module [program-128](https://tfhub.dev/google/progan-128/1), **CelebA** dataset, on a GPU of 636,801 steps with a batch size of 16.
+
+Running this pre-trained model will generate two outputs: a GIF which is an example of latent space interpolation between two vectors and 
+
+>Note: The python code for the GAN and CNN models are slight modifications of Google's Colab [Generating Images](https://github.com/tensorflow/hub/blob/master/examples/colab/tf_hub_generative_image_module.ipynb) 
 ### Install Dependencies for the Image Generator
 
 TF-Hub Generative Image Model
@@ -171,7 +169,16 @@ python3 gen-image.py
 
 ### Results
 
-The following results will appear shortly after you run the script.
+The following results will appear shortly after you run the script: a GIF and loss values.
+
+The GIF below was generated as a result of the pre-trained GAN model and TF-Hub and it highlights the latent space interpolation between random vectors. We can think of the latent space as the compressed representation of the original image(s), from these values the new images are generated with the goal of generating images close as possible as the originals. Learn more about [latent variables and GANs](https://jhui.github.io/2017/03/05/Generative-adversarial-models/).
+
+![animation](assets/animation.gif)
+
+On your terminal you will also see the following values. These values were obtained by first finding the loss function between a target image in this case and image from the **CelebrityAs** dataset and the  generated image. Gradient descent was then used in the loss function generated which generated the values that would minimize the loss. Gradient descent is a optimization algorithm used to find the minimum of a function or the point where the loss function converges. Learn more about [gradient descent](https://developers.google.com/machine-learning/crash-course/reducing-loss/gradient-descent).
+
+In this case because an image from the same dataset was used the descent to the minimum was quick. These can be noted from the values below. 
+
 ~~~
 ~/venv
 $python3 gen-image.py
@@ -222,17 +229,12 @@ $python3 gen-image.py
 
 Also check your **venv** directory for the animation gif generated with celebrity images.
 
-![animation](assets/animation.gif)
+
 
 ## Recognition Network
 
 DCGAN networks are very powerful as seen on the results on the previous section. Human brains, 
 
-
-![frame-00-labeled](assets/frame-00-labeled.jpg)
-![frame-06-labeled](assets/frame-06-labeled.jpg)
-![frame-15-labeled](assets/frame-15-labeled.jpg)
-![frame-20-labeled](assets/frame-20-labeled.jpg)
 
 ## Summary
 Congratulations, you have succesfully gn

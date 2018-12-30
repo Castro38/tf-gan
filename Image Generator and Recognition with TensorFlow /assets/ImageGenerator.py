@@ -142,6 +142,37 @@ def find_closest_latent_vector(num_optimization_steps):
         losses.append(loss_out)
         print(loss_out)
     return images, losses
+    
+  # Code to upload an image
+    def main(argv):
+  inputfile = ''
+  output_file = ''
+  helpMessage = """
+  <python >= 3.6> ImageGenerator.py  --type <image_type>
+  --type is for image type (e.g. jpg, jpeg, png)
+  """
+  
+  try:
+    opts, args = getopt.getopt(argv, "hi:o:t",{"idir=","odir=","type="})
+  except getopt.GetoptError:
+    print(helpMessage)
+    sys.exit(2)
+  for opt, arg in opts:
+    if opt == '--help':
+      print(helpMessage)
+      sys.exit(2)
+    elif opt in ("-i", "--idir"):
+      localDir = arg
+    elif opt in ("-o", "--odir"):
+      saveDir = arg
+    elif opt in ("-t", "--type"):
+      im_type = arg
+
+    
+  run_inference_locally(localDir, im_type, saveDir)
+
+if __name__ == '__main__':
+  main(sys.argv[1:])
 
 
 result = find_closest_latent_vector(num_optimization_steps=40)
